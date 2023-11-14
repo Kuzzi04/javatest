@@ -11,7 +11,7 @@ public class Email {
     // Email ID will be auto-generated
     // Using generation type identity for persistence
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // TODO: More explanation
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emailId;
 
     private String emailFrom;

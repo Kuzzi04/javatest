@@ -51,7 +51,6 @@ public class EmailController {
     @PostMapping("/new")
     public ResponseEntity<Email> createEmail(@RequestBody Email email) {
         Email createdEmail = emailService.createEmail(email);
-        // TODO: ResponseEntity status + body?
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEmail);
     }
 
