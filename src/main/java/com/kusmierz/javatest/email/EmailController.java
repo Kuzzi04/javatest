@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/emails")
 public class EmailController {
+    // injecting the EmailService for handling email-related operations
     @Autowired
     private EmailService emailService;
 
@@ -23,7 +24,7 @@ public class EmailController {
     }
 
     // Endpoint to get email by ID
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Email> getEmailById(@PathVariable Long id) {
         Email email = emailService.getEmailById(id);
         return ResponseEntity.ok(email);
@@ -47,6 +48,9 @@ public class EmailController {
     public List<Email> getEmailsByEmailFrom(@PathVariable String sender) {
         return emailService.getEmailsByEmailFrom(sender);
     }
+
+
+
     // Endpoint to create a new email
     @PostMapping("/new")
     public ResponseEntity<Email> createEmail(@RequestBody Email email) {
@@ -54,8 +58,10 @@ public class EmailController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEmail);
     }
 
+
+
     // Endpoint to update an email
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<Email> updateEmail(@PathVariable Long id, @RequestBody Email updatedEmail) {
         // receive id of email by path and get updated email from request body
         Email updated = emailService.updateEmail(id, updatedEmail);
@@ -74,6 +80,8 @@ public class EmailController {
         return sent != null ? ResponseEntity.ok(sent) : ResponseEntity.notFound().build();
     }
 
+
+
     // Endpoint to delete an email by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Email> deleteEmail(@PathVariable Long id) {
@@ -89,6 +97,8 @@ public class EmailController {
         // return a NO CONTENT status with no body
         return ResponseEntity.noContent().build();
     }
+
+
 
     // Only for testing purposes
     @PostMapping("/testmails")
